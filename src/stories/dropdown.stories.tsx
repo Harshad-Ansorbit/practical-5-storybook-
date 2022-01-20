@@ -1,21 +1,17 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Button from '../components/ui/button';
+import Dropdown from '../components/ui/dropdown';
 
 export default {
-  title: 'Example/MyButton',
-  component: Button,
+  title: 'Example/Dropdown',
+  component: Dropdown,
 
   argTypes: {
     backgroundColor: { control: 'color' },
     size: {
       control: { type: 'radio' },
       options: ['large', 'normal', 'small'],
-    },
-    iconDirection: {
-      control: { type: 'radio' },
-      options: ['left', 'right'],
     },
 
     variant: {
@@ -31,9 +27,11 @@ export default {
       ],
     },
   },
-} as ComponentMeta<typeof Button>;
+} as ComponentMeta<typeof Dropdown>;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: ComponentStory<typeof Dropdown> = (args) => (
+  <Dropdown {...args} />
+);
 
 export const Default = Template.bind({});
 
@@ -46,10 +44,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   variant: 'primary',
   label: 'primary',
-  outline: true,
-  icon: true,
-  iconDirection: 'left',
-  iconName: 'Bell',
 };
 
 export const Secondary = Template.bind({});
@@ -82,26 +76,12 @@ danger.args = {
   label: 'danger',
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-  variant: 'default',
-  label: 'Disabled',
-};
-
 export const Rounded = Template.bind({});
 Rounded.args = {
   rounded: true,
-  outline: true,
+
   variant: 'default',
   label: 'Rounded',
-};
-
-export const Outline = Template.bind({});
-Outline.args = {
-  outline: true,
-  variant: 'default',
-  label: 'Outline',
 };
 
 export const Lightbutton = Template.bind({});
@@ -109,15 +89,6 @@ Lightbutton.args = {
   lightButton: true,
   variant: 'default',
   label: 'Light Button',
-};
-
-export const Icon = Template.bind({});
-Icon.args = {
-  icon: true,
-  iconDirection: 'left',
-  iconName: 'Bell',
-  variant: 'default',
-  label: 'Icon Buttons',
 };
 
 export const Large = Template.bind({});
@@ -132,18 +103,4 @@ Small.args = {
   size: 'small',
   variant: 'default',
   label: 'Small Button',
-};
-
-export const Loading = Template.bind({});
-Loading.args = {
-  loading: true,
-  variant: 'default',
-  label: 'Loading Button',
-};
-
-export const ButtonBlock = Template.bind({});
-ButtonBlock.args = {
-  block: true,
-  variant: 'default',
-  label: 'Button block',
 };
