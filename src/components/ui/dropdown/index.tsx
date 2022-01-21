@@ -60,7 +60,7 @@ const Dropdown: React.FC<IDropdownProps> = (props) => {
     <>
       <select
         className={clsx(
-          'cursor-pointer',
+          'cursor-pointer select-none',
           getVariant(props.variant),
           props.variant === 'default' && 'text-black',
           props.rounded ? 'rounded-full' : 'rounded-md',
@@ -70,13 +70,13 @@ const Dropdown: React.FC<IDropdownProps> = (props) => {
           'text-sm'
         )}
       >
-        <option value="" selected>
+        <option className="" selected>
           option
         </option>
-        <option value="">Menu-1</option>
-        <option value="">Menu-1</option>
-        <option value="">Menu-1</option>
-        <option value="">Menu-1</option>
+        <option value=""> Menu-1</option>
+        <option value=""> Menu-1</option>
+        <option value=""> Menu-1</option>
+        <option value=""> Menu-1</option>
       </select>
     </>
   );

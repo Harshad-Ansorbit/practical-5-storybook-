@@ -14,7 +14,7 @@ import {
   Square,
 } from '../../../icons';
 
-import * as Icons from '../../../icons';
+// import * as Icons from '../../../icons';
 
 interface IconsProps {
   iconName: string;
