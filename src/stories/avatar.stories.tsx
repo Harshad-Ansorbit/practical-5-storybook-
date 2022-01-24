@@ -1,14 +1,13 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Avatar from '../components/ui/avatar'
+import Avatar from '../components/ui/avatar';
 
 export default {
   title: 'Example/Avatar',
   component: Avatar,
 
   argTypes: {
-    backgroundColor: { control: 'color' },
     icon: { control: 'boolean' },
     iconName: { control: 'text' },
 
@@ -28,15 +27,20 @@ export default {
   },
 } as ComponentMeta<typeof Avatar>;
 
-const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
+const image = {
+  imageURL: 'https://picsum.photos/200',
+};
 
+const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   variant: 'square',
+  ...image,
 };
 
 export const AvatarIcon = Template.bind({});
 AvatarIcon.args = {
+  ...image,
   variant: 'square',
   icon: true,
   iconName: 'Bell',
@@ -45,12 +49,14 @@ AvatarIcon.args = {
 
 export const Shadow = Template.bind({});
 Shadow.args = {
+  ...image,
   variant: 'square',
   shadow: true,
 };
 
 export const Size = Template.bind({});
 Size.args = {
+  ...image, 
   variant: 'square',
   size: 'large',
 };

@@ -8,52 +8,34 @@ export default {
   component: List,
 
   argTypes: {
-    backgroundColor: { control: 'color' },
-    // size: {
-    //   control: { type: 'radio' },
-    //   options: ['large', 'normal', 'small'],
-    // },
-    order: {
-      control: { type: 'radio' },
-      options: ['decimal', 'descriptive', 'none'],
-    },
-
-    variant: {
-      control: { type: 'radio' },
-      options: ['default', 'order', 'active', 'iconlist', 'badges'],
-    },
+    icon: { control: 'boolean' },
+    iconName: { control: 'text' },
+    badges: { control: 'boolean' },
+    active: { control: 'boolean' },
   },
 } as ComponentMeta<typeof List>;
 
 const Template: ComponentStory<typeof List> = (args) => <List {...args} />;
-
 export const Default = Template.bind({});
 Default.args = {
-  variant: 'default',
-  order: 'none',
-};
-
-export const Order = Template.bind({});
-Order.args = {
-  variant: 'default',
-  order: 'descriptive',
-};
-
-export const Active = Template.bind({});
-Active.args = {
-  variant: 'active',
-  order: 'descriptive',
-};
-
-export const IconList = Template.bind({});
-IconList.args = {
-  variant: 'iconlist',
-  order: 'descriptive',
-  iconName: 'Bell',
+  title: 'Basic List Group',
 };
 
 export const Badges = Template.bind({});
 Badges.args = {
-  variant: 'badges',
-  order: 'descriptive',
+  badges: true,
+  ...Default.args,
+};
+
+export const IconList = Template.bind({});
+IconList.args = {
+  icon: true,
+  iconName: 'Bell',
+  ...Default.args,
+};
+
+export const Active = Template.bind({});
+Active.args = {
+  active: true,
+  ...Default.args,
 };

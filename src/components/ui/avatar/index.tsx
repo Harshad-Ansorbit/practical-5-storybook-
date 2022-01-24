@@ -9,10 +9,11 @@ interface IAvatarProps {
   iconDirection: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   shadow?: boolean;
   size: 'large' | 'normal' | 'small';
-  onClick?: (event: MouseEvent) => void;
+  imageURL: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-function getSize(size: string | undefined) {
+function getSize(size: IAvatarProps['size']) {
   if (size === 'small') {
     return 'h-12 w-12';
   } else if (size === 'large') {
@@ -22,28 +23,27 @@ function getSize(size: string | undefined) {
   }
 }
 
-function getVariant(variant: string | undefined) {
+function getVariant(variant: IAvatarProps['variant']) {
   switch (variant) {
     case 'rounded':
       return 'rounded-full';
-
     case 'radius':
       return 'rounded-md';
-
     default:
+      return '';
   }
 }
 
-function getIconDirection(iconDirection: string | undefined) {
+function getIconDirection(iconDirection: IAvatarProps['iconDirection']) {
   switch (iconDirection) {
-    case 'top-left':
-      return '-top-2 -left-2';
     case 'top-right':
       return '-top-2 -right-2';
     case 'bottom-left':
       return '-bottom-2 -left-2';
     case 'bottom-right':
       return '-bottom-2 -right-2';
+    default:
+      return '-top-2 -left-2';
   }
 }
 
@@ -51,44 +51,26 @@ const Avatar: React.FC<IAvatarProps> = (props) => {
   return (
     <>
       <div
-        onClick={() => {
-          props.onClick;
-        }}
-        className={clsx(
-          'relative inline-block',
-          props.shadow ? 'drop-shadow-2xl' : ''
-        )}
+        onClick={props.onClick}
+        className={clsx('relative inline-block', {
+          'drop-shadow-2xl': props.shadow,
+        })}
       >
-        {props.icon ? (
-          <>
-            <Icon
-              className={clsx(
-                'inline-block h-6 w-6 absolute',
-                getIconDirection(props.iconDirection),
-                'rounded-full p-1 bg-yellow-400'
-              )}
-              iconName={props.iconName}
-            />
-
-            <img
-              src="https://picsum.photos/200"
-              alt="image1"
-              className={clsx(
-                'inline-block',
-                getSize(props.size),
-                getVariant(props.variant)
-              )}
-            />
-          </>
-        ) : (
-          <>
-            <img
-              src="https://picsum.photos/200"
-              alt="image1"
-              className={clsx(getSize(props.size), getVariant(props.variant))}
-            />
-          </>
+        {props.icon && (
+          <Icon
+            className={clsx(
+              'inline-block h-6 w-6 absolute',
+              getIconDirection(props.iconDirection),
+              'rounded-full p-1 bg-yellow-400'
+            )}
+            iconName={props.iconName}
+          />
         )}
+        <img
+          src={props.imageURL}
+          alt="image2"
+          className={clsx(getSize(props.size), getVariant(props.variant))}
+        />
       </div>
     </>
   );

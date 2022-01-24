@@ -21,6 +21,8 @@ interface IDropdownProps {
     | 'danger';
 }
 
+const items = ['item-1', 'item-2', 'item-3', 'item-4'];
+
 function getSize(size: string | undefined) {
   if (size === 'small') {
     return 'p-1 pl-1 text-xs';
@@ -37,19 +39,14 @@ function getVariant(variant: string | undefined) {
       return 'bg-indigo-500 text-white';
     case 'secondary':
       return 'bg-cyan-500 text-white';
-
     case 'success':
       return 'bg-green-500 text-white';
-
     case 'info':
       return 'bg-blue-500 text-white';
-
     case 'warning':
       return 'bg-yellow-500 text-white';
-
     case 'danger':
       return 'bg-red-500 text-white';
-
     default:
       return 'bg-stone-300';
   }
@@ -73,10 +70,9 @@ const Dropdown: React.FC<IDropdownProps> = (props) => {
         <option className="" selected>
           option
         </option>
-        <option value=""> Menu-1</option>
-        <option value=""> Menu-1</option>
-        <option value=""> Menu-1</option>
-        <option value=""> Menu-1</option>
+        {items.map((item) => (
+          <option value={item}>{item}</option>
+        ))}
       </select>
     </>
   );

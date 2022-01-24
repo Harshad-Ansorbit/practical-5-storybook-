@@ -9,19 +9,6 @@ export default {
 
   argTypes: {
     backgroundColor: { control: 'color' },
-    // size: {
-    //   control: { type: 'radio' },
-    //   options: ['large', 'normal', 'small'],
-    // },
-    // order: {
-    //   control: { type: 'radio' },
-    //   options: ['decimal', 'descriptive', 'none'],
-    // },
-
-    // variant: {
-    //   control: { type: 'radio' },
-    //   options: ['default', 'order', 'active', 'iconlist', 'badges'],
-    // },
   },
 } as ComponentMeta<typeof Pagination>;
 

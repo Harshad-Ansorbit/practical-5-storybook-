@@ -25,7 +25,7 @@ interface ButtonProps {
     | 'danger';
 }
 
-function getSize(size: string | undefined) {
+function getSize(size: ButtonProps['size']) {
   if (size === 'small') {
     return 'p-1 pl-1 text-xs';
   } else if (size === 'large') {
@@ -35,7 +35,10 @@ function getSize(size: string | undefined) {
   }
 }
 
-function getVariant(variant: string, outline: boolean | undefined) {
+function getVariant(
+  variant: ButtonProps['variant'],
+  outline: ButtonProps['outline']
+) {
   switch (variant) {
     case 'primary':
       return outline
@@ -70,76 +73,46 @@ function getVariant(variant: string, outline: boolean | undefined) {
 
 const Button: React.FC<ButtonProps> = (props) => {
   return (
-    <>
-      <button
-        disabled
-        type="button"
-        className={clsx(
-          'cursor-pointer',
-          getVariant(props.variant, props.outline),
-          props.variant === 'default' && 'text-black',
-          props.rounded ? 'rounded-full' : 'rounded-md',
-          props.lightButton ? 'opacity-50 hover:opacity-1' : 'opacity-100',
-          props.block ? 'flex w-full justify-center' : '',
-          getSize(props.size),
-          'hover:opacity-60',
-          props.disabled && 'opacity-60 cursor-not-allowed',
-          'text-sm'
-        )}
+    <button
+      disabled
+      type="button"
+      className={clsx(
+        'cursor-pointer',
+        getVariant(props.variant, props.outline),
+        props.variant === 'default' && 'text-black',
+        props.rounded ? 'rounded-full' : 'rounded-md',
+        props.lightButton ? 'opacity-50 hover:opacity-1' : 'opacity-100',
+        props.block ? 'flex w-full justify-center' : '',
+        getSize(props.size),
+        'hover:opacity-60',
+        props.disabled && 'opacity-60 cursor-not-allowed',
+        'text-sm'
+      )}
+    >
+      <div
+        className={clsx('flex ', {
+          'flex-row-reverse': props.iconDirection === 'right',
+        })}
       >
-        <div className="flex">
-          {props.icon ? (
-            props.iconDirection === 'left' ? (
-              <>
-                <div className="flex-1 h-5 w-5 ">
-                  {props.icon ? (
-                    <Icon
-                      className="flex-1 h-5 w-5"
-                      iconName={props.iconName}
-                    />
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div className="flex-2">{props.label}</div>
-              </>
-            ) : (
-              <>
-                <div className="flex flex-row-reverse">
-                  <div className=" ">
-                    {props.icon ? (
-                      <Icon
-                        className="flex-1 h-5 w-5"
-                        iconName={props.iconName}
-                      />
-                    ) : (
-                      ''
-                    )}
-                  </div>
-                  <div className="flex-2">{props.label}</div>
-                </div>
-              </>
-            )
-          ) : props.loading ? (
-            <>
-              <div
-                className={clsx(
-                  getSize(props.size),
-                  'spinner-border animate-spin inline-block',
-                  'rounded-full border-t-4 border-indigo-500 mr-2'
-                )}
-                role="status"
-              ></div>
-              <div className="flex-8">{props.label}</div>
-            </>
-          ) : (
-            <>
-              <div className="flex-8">{props.label}</div>
-            </>
-          )}
-        </div>
-      </button>
-    </>
+        {props.icon && (
+          <div className={clsx('flex flex-1 h-5 w-5 ')}>
+            {!!props.icon && (
+              <Icon className="flex-1 h-5 w-5" iconName={props.iconName} />
+            )}
+          </div>
+        )}
+        {props.loading && (
+          <div
+            className={clsx(
+              getSize(props.size),
+              'spinner-border animate-spin inline-block',
+              'rounded-full border-t-4 border-indigo-500 mr-2'
+            )}
+          ></div>
+        )}
+        <div className="flex-8">{props.label}</div>
+      </div>
+    </button>
   );
 };
 

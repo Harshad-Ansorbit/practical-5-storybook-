@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, SVGProps } from 'react';
 import {
   Bell,
   Billing,
@@ -16,7 +16,7 @@ import {
 
 // import * as Icons from '../../../icons';
 
-interface IconsProps {
+interface IconsProps extends SVGProps<SVGSVGElement> {
   iconName: string;
   className: string;
 }
@@ -36,14 +36,14 @@ const IconMappping: { [key: string]: any } = {
   Square: Square,
 };
 
-function Icon({ iconName, className }: IconsProps) {
+function Icon({ iconName, className, ...rest }: IconsProps) {
   if (!IconMappping[iconName]) return null;
 
   const IconComponent = IconMappping[iconName];
 
   return (
     <div className={className}>
-      <IconComponent className="fill-current" />
+      <IconComponent className="fill-current" {...rest} />
     </div>
   );
 }
