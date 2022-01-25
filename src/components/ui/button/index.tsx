@@ -25,7 +25,7 @@ interface ButtonProps {
     | 'danger';
 }
 
-function getSize(size: ButtonProps['size']) {
+function getSizeClassis(size: ButtonProps['size']) {
   if (size === 'small') {
     return 'p-1 pl-1 text-xs';
   } else if (size === 'large') {
@@ -35,7 +35,7 @@ function getSize(size: ButtonProps['size']) {
   }
 }
 
-function getVariant(
+function getVariantClassis(
   variant: ButtonProps['variant'],
   outline: ButtonProps['outline']
 ) {
@@ -78,12 +78,12 @@ const Button: React.FC<ButtonProps> = (props) => {
       type="button"
       className={clsx(
         'cursor-pointer',
-        getVariant(props.variant, props.outline),
+        getVariantClassis(props.variant, props.outline),
         props.variant === 'default' && 'text-black',
         props.rounded ? 'rounded-full' : 'rounded-md',
         props.lightButton ? 'opacity-50 hover:opacity-1' : 'opacity-100',
         props.block ? 'flex w-full justify-center' : '',
-        getSize(props.size),
+        getSizeClassis(props.size),
         'hover:opacity-60',
         props.disabled && 'opacity-60 cursor-not-allowed',
         'text-sm'
@@ -104,7 +104,7 @@ const Button: React.FC<ButtonProps> = (props) => {
         {props.loading && (
           <div
             className={clsx(
-              getSize(props.size),
+              getSizeClassis(props.size),
               'spinner-border animate-spin inline-block',
               'rounded-full border-t-4 border-indigo-500 mr-2'
             )}

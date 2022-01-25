@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import Icon from '../icon';
 
-interface IAvatarProps {
+interface AvatarProps {
   variant: 'rounded' | 'square' | 'radius';
   icon?: boolean;
   iconName: string;
@@ -13,7 +13,7 @@ interface IAvatarProps {
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-function getSize(size: IAvatarProps['size']) {
+function getSizeClassis(size: AvatarProps['size']) {
   if (size === 'small') {
     return 'h-12 w-12';
   } else if (size === 'large') {
@@ -23,7 +23,7 @@ function getSize(size: IAvatarProps['size']) {
   }
 }
 
-function getVariant(variant: IAvatarProps['variant']) {
+function getVariantClassis(variant: AvatarProps['variant']) {
   switch (variant) {
     case 'rounded':
       return 'rounded-full';
@@ -34,7 +34,7 @@ function getVariant(variant: IAvatarProps['variant']) {
   }
 }
 
-function getIconDirection(iconDirection: IAvatarProps['iconDirection']) {
+function getIconDirectionClassis(iconDirection: AvatarProps['iconDirection']) {
   switch (iconDirection) {
     case 'top-right':
       return '-top-2 -right-2';
@@ -47,7 +47,7 @@ function getIconDirection(iconDirection: IAvatarProps['iconDirection']) {
   }
 }
 
-const Avatar: React.FC<IAvatarProps> = (props) => {
+const Avatar: React.FC<AvatarProps> = (props) => {
   return (
     <>
       <div
@@ -60,7 +60,7 @@ const Avatar: React.FC<IAvatarProps> = (props) => {
           <Icon
             className={clsx(
               'inline-block h-6 w-6 absolute',
-              getIconDirection(props.iconDirection),
+              getIconDirectionClassis(props.iconDirection),
               'rounded-full p-1 bg-yellow-400'
             )}
             iconName={props.iconName}
@@ -69,7 +69,10 @@ const Avatar: React.FC<IAvatarProps> = (props) => {
         <img
           src={props.imageURL}
           alt="image2"
-          className={clsx(getSize(props.size), getVariant(props.variant))}
+          className={clsx(
+            getSizeClassis(props.size),
+            getVariantClassis(props.variant)
+          )}
         />
       </div>
     </>

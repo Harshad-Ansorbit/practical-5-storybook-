@@ -23,7 +23,7 @@ interface IDropdownProps {
 
 const items = ['item-1', 'item-2', 'item-3', 'item-4'];
 
-function getSize(size: string | undefined) {
+function getSizeClassis(size: string | undefined) {
   if (size === 'small') {
     return 'p-1 pl-1 text-xs';
   } else if (size === 'large') {
@@ -33,7 +33,7 @@ function getSize(size: string | undefined) {
   }
 }
 
-function getVariant(variant: string | undefined) {
+function getVariantClassis(variant: string | undefined) {
   switch (variant) {
     case 'primary':
       return 'bg-indigo-500 text-white';
@@ -58,11 +58,11 @@ const Dropdown: React.FC<IDropdownProps> = (props) => {
       <select
         className={clsx(
           'cursor-pointer select-none',
-          getVariant(props.variant),
+          getVariantClassis(props.variant),
           props.variant === 'default' && 'text-black',
           props.rounded ? 'rounded-full' : 'rounded-md',
           props.lightButton ? 'opacity-50 hover:opacity-1' : 'opacity-100',
-          getSize(props.size),
+          getSizeClassis(props.size),
           'hover:opacity-60',
           'text-sm'
         )}
